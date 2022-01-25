@@ -1,10 +1,12 @@
 import argparse
 from PIL import Image
 
+
 def png2pdf(in_file, out_file, resolution=120):
     image1 = Image.open(in_file)
     im1 = image1.convert('RGB')
     im1.save(out_file, resolution=resolution)
+
 
 def main():
     parser = argparse.ArgumentParser("converting png into pdf")

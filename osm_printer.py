@@ -5,11 +5,9 @@ from make_png import generate_image
 from tile_servers import osm_tile_server, osm_sea_tile_server
 
 
-
-
 def main():
     parser = argparse.ArgumentParser(description="generate png from OSM data")
-    parser.add_argument("xmin", type=float  )
+    parser.add_argument("xmin", type=float)
     parser.add_argument("xmax", type=float)
     parser.add_argument("ymin", type=float)
     parser.add_argument("ymax", type=float)
@@ -35,18 +33,19 @@ def main():
     if args.server >= len(osm_tile_server):
         pass
 
-    layers = [ osm_tile_server[args.server]["url"] ]
+    layers = [osm_tile_server[args.server]["url"]]
     if args.seamap:
         layers.append(osm_sea_tile_server[0]["url"])
 
     if not args.out:
         now = datetime.datetime.now()
         output_file_name = "map%02d-%02d%02d%02d-%02d%02d.png" % (
-        args.zoom, now.year % 100, now.month, now.day, now.hour, now.minute)
+            args.zoom, now.year % 100, now.month, now.day, now.hour, now.minute)
     else:
         output_file_name = args.out
 
     generate_image(args.zoom, xmin, ymin, xmax, ymax, layers, output_file_name)
+
 
 if __name__ == "__main__":
     main()
