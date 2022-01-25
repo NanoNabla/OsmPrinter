@@ -9,23 +9,23 @@ from tile_servers import osm_tile_server, osm_sea_tile_server
 
 def main():
     parser = argparse.ArgumentParser(description="generate png from OSM data")
-    parser.add_argument("out", type=str, help="output file")
+    parser.add_argument("xmin", type=float  )
+    parser.add_argument("xmax", type=float)
+    parser.add_argument("ymin", type=float)
+    parser.add_argument("ymax", type=float)
+    parser.add_argument("zoom", type=int)
+    parser.add_argument("--tiles", type=bool, default=True, help="False if coordinates are not tile number but degree")
 
-    parser.add_argument("xmin", type=float,  required=True)
-    parser.add_argument("xmax", type=float, required=True)
-    parser.add_argument("ymin", type=float, required=True)
-    parser.add_argument("ymax", type=float, required=True)
-    parser.add_argument("zoom", type=int, required=True)
-    parser.add_argument("--tiles", type=bool, default=True)
+    parser.add_argument("--out", type=str, help="output file")
 
-    parser.add_argument("--server", type=int, default=0)
-    parser.add_argument("--seamap", type=bool, default=True, help="Use OpenSeaMapLayer")
+    parser.add_argument("--server", type=int, default=0, help="number of the base map server")
+    parser.add_argument("--seamap", type=bool, default=True, help="use OpenSeaMap layer")
     parser.add_argument("--grid", type=bool, default=True, help="display a grid")
     parser.add_argument("--scale", type=bool, default=True, help="display a scale")
 
     args = parser.parse_args()
 
-    if not args.tiles:
+    if args.tiles:
         xmin, ymin = int(args.xmin), int(args.ymin)
         xmax, ymax = int(args.xmax), int(args.ymax)
     else:
@@ -41,7 +41,7 @@ def main():
 
     if not args.out:
         now = datetime.datetime.now()
-        outputFileName = "map%02d-%02d%02d%02d-%02d%02d.png" % (
+        output_file_name = "map%02d-%02d%02d%02d-%02d%02d.png" % (
         args.zoom, now.year % 100, now.month, now.day, now.hour, now.minute)
     else:
         output_file_name = args.out
