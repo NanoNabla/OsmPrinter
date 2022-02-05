@@ -43,7 +43,13 @@ osm_tile_server = [
         "name": "CyclOSM: OpenStreetMap-based bicycle map",
         "url": "https://a.tile-cyclosm.openstreetmap.fr/cyclosm/!z/!x/!y.png",
         "rateLimit": 1,
-    }]
+    },
+    {
+        "name": "OpenRiverboatMap",
+        "url": "https://tile.openstreetmap.fr/openriverboatmap/!z/!x/!y.png",
+        "rateLimit": 1,
+    }
+]
 
 osm_overlay_tile_server = [
     {
