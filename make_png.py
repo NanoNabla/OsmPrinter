@@ -4,21 +4,34 @@ import io, urllib.request, time, re, random
 from PIL import Image, ImageDraw
 from utils import tilesize, attribution, tile_num2deg, pixel_per_km, degree2min_str
 
-
-# TODO do not use constantly 1km, resize it depending on zoom level
-def draw_scalebar(draw, xmin, ymax, ysize, zoom):
+def draw_scale_bar(draw, xmin, ymax, xsize, ysize, zoom):
     colormap = [(0, 0, 0), (255, 0, 0)]
     line_width = 5
+    repeat_line = 5
+    label = "1km"
+
     ########
     ypos = ysize * tilesize - 50
     xpos_min = 5
     lat, _ = tile_num2deg(xmin, ymax, zoom)
     xpos_len = abs(pixel_per_km(zoom, lat))
+    image_size = xsize * tilesize - 25
 
-    for i in range(5):
+    # todo rescaling on low zoom level where 1km is rather short
+    if xpos_len * repeat_line > image_size:
+        repeat_line = 1
+
+    if xpos_len > image_size:
+        xpos_len /= 10
+        label = "100m"
+
+    if xpos_len > image_size:
+        xpos_len /= 10
+
+    for i in range(repeat_line):
         draw.line([(xpos_min + xpos_len * i, ypos), (xpos_min + ((i + 1) * xpos_len), ypos)], fill=colormap[i % 2],
                   width=line_width)
-    draw.text((xpos_min + 5, ypos + line_width + 5), "1km", (0, 0, 0))
+    draw.text((xpos_min + 5, ypos + line_width + 5), label, (0, 0, 0))
 
 
 def draw_grid(draw, xmin, ymin, xsize, ysize, zoom):
@@ -38,7 +51,7 @@ def draw_credits(draw, ysize):
     draw.text((5, ysize * tilesize - 15), attribution, (0, 0, 0))
 
 
-def generate_image(zoom, xmin, ymin, xmax, ymax, layers, output_file_name="map.png", grid=False):
+def generate_image(zoom, xmin, ymin, xmax, ymax, layers, output_file_name="map.png", scalebar=False, grid=False):
     xsize = xmax - xmin + 1
     ysize = ymax - ymin + 1
 
@@ -67,7 +80,8 @@ def generate_image(zoom, xmin, ymin, xmax, ymax, layers, output_file_name="map.p
 
     draw = ImageDraw.Draw(resultImage)
     draw_credits(draw, ysize)
-    draw_scalebar(draw, xmin, ymax, ysize, zoom)
+    if scalebar:
+        draw_scale_bar(draw, xmin, ymax, xsize, ysize, zoom)
     if grid:
         draw_grid(draw, xmin, ymin, xsize, ysize, zoom)
     del draw

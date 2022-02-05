@@ -19,7 +19,7 @@ def main():
     parser.add_argument("--server", type=int, default=0, help="number of the base map server")
     parser.add_argument("--overlay", type=int, default=0, help="number of an overlay server, default no")
     parser.add_argument("--grid", type=bool, default=True, help="display a grid")
-    parser.add_argument("--scale", type=bool, default=True, help="display a scale")
+    parser.add_argument("--scalebar", type=bool, default=True, help="display a scale bar")
 
     args = parser.parse_args()
 
@@ -45,7 +45,7 @@ def main():
     else:
         output_file_name = args.out
 
-    generate_image(args.zoom, xmin, ymin, xmax, ymax, layers, output_file_name, args.grid)
+    generate_image(args.zoom, xmin, ymin, xmax, ymax, layers, output_file_name, args.scalebar, args.grid)
 
 
 if __name__ == "__main__":
