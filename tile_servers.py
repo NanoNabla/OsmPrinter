@@ -45,9 +45,51 @@ osm_tile_server = [
         "rateLimit": 1,
     }]
 
-osm_sea_tile_server = [
+osm_overlay_tile_server = [
+    {
+        "name": "dummy",
+        "url": "",
+        "rateLimit": 5
+    },
     {
         "name": "Standard OpenSeaMap tile server",
         "url": "http://tiles.openseamap.org/seamark/!z/!x/!y.png",
         "rateLimit": 5
-    }]
+    },
+    {
+        "name": "Waymarked Trails: Hiking routes",
+        "url": "https://tile.waymarkedtrails.org/hiking/!z/!x/!y.png ",
+        "rateLimit": 5
+    },
+    {
+        "name": "Waymarked Trails: Cycling routes",
+        "url": "https://tile.waymarkedtrails.org/cycling/!z/!x/!y.png ",
+        "rateLimit": 5
+    },
+    {
+        "name": "Waymarked Trails: Riding routes",
+        "url": "https://tile.waymarkedtrails.org/riding/!z/!x/!y.png ",
+        "rateLimit": 5
+    },
+
+    {
+        "name": "OpenPtMap Transport map",
+        "url": "http://www.openptmap.org/tiles/!z/!x/!y.png",
+        "rateLimit": 5
+    },
+    {
+        "name": "OpenRailwayMap: Railway infrastructure",
+        "url": "http://a.tiles.openrailwaymap.org/standard/!z/!x/!y.png",
+        "rateLimit": 5
+    },
+    {
+        "name": "OpenRailwayMap: Railway maxspeed",
+        "url": "http://a.tiles.openrailwaymap.org/maxspeed/!z/!x/!y.png",
+        "rateLimit": 5
+    },
+    {
+        "name": "OpenRailwayMap: Railway signals",
+        "url": "http://a.tiles.openrailwaymap.org/signals/!z/!x/!y.png",
+        "rateLimit": 5
+    }
+]

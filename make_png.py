@@ -38,7 +38,7 @@ def draw_credits(draw, ysize):
     draw.text((5, ysize * tilesize - 15), attribution, (0, 0, 0))
 
 
-def generate_image(zoom, xmin, ymin, xmax, ymax, layers, output_file_name="map.png"):
+def generate_image(zoom, xmin, ymin, xmax, ymax, layers, output_file_name="map.png", grid=False):
     xsize = xmax - xmin + 1
     ysize = ymax - ymin + 1
 
@@ -68,7 +68,9 @@ def generate_image(zoom, xmin, ymin, xmax, ymax, layers, output_file_name="map.p
     draw = ImageDraw.Draw(resultImage)
     draw_credits(draw, ysize)
     draw_scalebar(draw, xmin, ymax, ysize, zoom)
-    draw_grid(draw, xmin, ymin, xsize, ysize, zoom)
+    if grid:
+        draw_grid(draw, xmin, ymin, xsize, ysize, zoom)
     del draw
 
     resultImage.save(output_file_name)
+    print("file {} written".format(output_file_name))
