@@ -113,3 +113,11 @@ osm_overlay_tile_server = [
         "rateLimit": 5
     }
 ]
+
+def print_index2osm_tile_server():
+    for i in range(len(osm_tile_server)):
+        print("{}: {}".format(i, osm_tile_server[i]['name']))
+
+def print_index2osm_overlay_tile_server():
+    for i in range(len(osm_overlay_tile_server)):
+        print("{}: {}".format(i, osm_overlay_tile_server[i]['name']))
