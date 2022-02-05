@@ -67,8 +67,23 @@ osm_overlay_tile_server = [
         "rateLimit": 5
     },
     {
+        "name": "Waymarked Trails: Mountain bike routes",
+        "url": "https://tile.waymarkedtrails.org/mtb/!z/!x/!y.png ",
+        "rateLimit": 5
+    },
+    {
         "name": "Waymarked Trails: Riding routes",
         "url": "https://tile.waymarkedtrails.org/riding/!z/!x/!y.png ",
+        "rateLimit": 5
+    },
+    {
+        "name": "Waymarked Trails: Inline skating routes",
+        "url": "https://tile.waymarkedtrails.org/skating/!z/!x/!y.png ",
+        "rateLimit": 5
+    },
+    {
+        "name": "Waymarked Trails: Slope routes",
+        "url": "https://tile.waymarkedtrails.org/slopes/!z/!x/!y.png ",
         "rateLimit": 5
     },
 
@@ -90,6 +105,11 @@ osm_overlay_tile_server = [
     {
         "name": "OpenRailwayMap: Railway signals",
         "url": "http://a.tiles.openrailwaymap.org/signals/!z/!x/!y.png",
+        "rateLimit": 5
+    },
+    {
+        "name": "OpenFireMaps",
+        "url": "http://www.openfiremap.de/hytiles/!z/!x/!y.png",
         "rateLimit": 5
     }
 ]
