@@ -32,4 +32,10 @@ def pixel_per_km(zoom, latitude):
 
 
 def get_scale(resolution, dpi, latitude):
-    return dpi * 1/0.0254 * resolution * math.cos(latitude)
+    return dpi * 1 / 0.0254 * resolution * math.cos(latitude)
+
+
+def degree2min_str(deg):
+    d = int(deg)
+    m = (deg - d) * 60
+    return "{}°{:.2f}'".format(d, m)

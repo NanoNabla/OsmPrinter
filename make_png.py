@@ -2,7 +2,7 @@
 
 import io, urllib.request, time, re, random
 from PIL import Image, ImageDraw
-from utils import tilesize, attribution, tile_num2deg, pixel_per_km
+from utils import tilesize, attribution, tile_num2deg, pixel_per_km, degree2min_str
 
 
 # TODO do not use constantly 1km, resize it depending on zoom level
@@ -23,15 +23,15 @@ def draw_scalebar(draw, xmin, ymax, ysize, zoom):
 
 def draw_grid(draw, xmin, ymin, xsize, ysize, zoom):
     for x in range(0, xsize):
-        xpos = x * tilesize + tilesize / 2
+        xpos = x * tilesize
         draw.line([(xpos, 0), (xpos, (ymin + ysize) * tilesize)], fill=(0, 0, 0), width=1)
         _, long = tile_num2deg(xmin + x, 0, zoom)
-        draw.text((xpos, 5), str(long), (0, 0, 0))
+        draw.text((xpos, 5), degree2min_str(long), (0, 0, 0))
     for y in range(0, ysize):
-        ypos = y * tilesize + tilesize / 2
+        ypos = y * tilesize
         draw.line([(0, ypos), ((xmin + xsize) * tilesize, ypos)], fill=(0, 0, 0), width=1)
         lat, _ = tile_num2deg(0, ymin + y, zoom)
-        draw.text((5, ypos), str(lat), (0, 0, 0))
+        draw.text((5, ypos), degree2min_str(lat), (0, 0, 0))
 
 
 def draw_credits(draw, ysize):
@@ -62,7 +62,7 @@ def generate_image(zoom, xmin, ymin, xmax, ymax, layers, output_file_name="map.p
                 resultImage.paste(image, ((x - xmin) * tilesize, (y - ymin) * tilesize), image.convert("RGBA"))
                 counter += 1
                 if counter == 10:
-                    #time.sleep(2);
+                    # time.sleep(2);
                     counter = 0
 
     draw = ImageDraw.Draw(resultImage)
