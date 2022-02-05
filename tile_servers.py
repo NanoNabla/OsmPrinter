@@ -47,12 +47,12 @@ osm_tile_server = [
 
 osm_overlay_tile_server = [
     {
-        "name": "dummy",
+        "name": "none",
         "url": "",
-        "rateLimit": 5
+        "rateLimit": 0
     },
     {
-        "name": "Standard OpenSeaMap tile server",
+        "name": "OpenSeaMap: Sea marks",
         "url": "http://tiles.openseamap.org/seamark/!z/!x/!y.png",
         "rateLimit": 5
     },
@@ -119,5 +119,5 @@ def print_index2osm_tile_server():
         print("{}: {}".format(i, osm_tile_server[i]['name']))
 
 def print_index2osm_overlay_tile_server():
-    for i in range(len(osm_overlay_tile_server)):
+    for i in range(1, len(osm_overlay_tile_server)):
         print("{}: {}".format(i, osm_overlay_tile_server[i]['name']))

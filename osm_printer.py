@@ -62,9 +62,10 @@ def main():
     parser.add_argument("--grid", type=bool, default=True, help="display a grid")
     parser.add_argument("--scalebar", type=bool, default=True, help="display a scale bar")
 
-    parser.add_argument("--print-servers", action=_PrintServersAction,
+    group = parser.add_argument_group('List available servers and exit')
+    group.add_argument("--print-servers", action=_PrintServersAction,
                         help="display a list of all available OSM servers")
-    parser.add_argument("--print-overlay-servers", action=_PrintOverlayServersAction,
+    group.add_argument("--print-overlay-servers", action=_PrintOverlayServersAction,
                         help="display a list of all available OSM overlay servers")
 
     args = parser.parse_args()
